@@ -5,7 +5,7 @@
 ```shell
 npm i wug-ui -S
 
-# for Vue 1.x
+# for Vue 2.x
 npm i wug-ui@1 -S
 ```
 
