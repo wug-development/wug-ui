@@ -27,6 +27,14 @@
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
   },
+  "keywords": [
+    "component",
+    "vue",
+    "mobile",
+    "eleme",
+    "wug",
+    "ui"
+  ],
   "eslintConfig": {
     "root": true,
     "env": {
