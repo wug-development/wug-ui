@@ -1,8 +1,9 @@
 {
   "name": "wug-ui",
   "version": "0.1.0",
+  "private": false,
   "scripts": {
-    "lib": "vue-cli-service build --target lib --name kui --dest lib packages/index.js",
+    "lib": "vue-cli-service build --target lib --name wug-ui --dest lib packages/index.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -35,6 +36,12 @@
     "wug",
     "ui"
   ],
+  "license": "MIT",
+  "main": "lib/wug-ui.umd.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wug-development/wug-ui.git"
+  },
   "eslintConfig": {
     "root": true,
     "env": {
