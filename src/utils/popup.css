@@ -1,0 +1,32 @@
+.wg-popup-bg-enter {
+    animation: wg-popup-bg-in .2s ease;
+}
+
+.wg-popup-bg-leave {
+    animation: wg-popup-bg-out .2s ease forwards;
+}
+
+@keyframes wg-popup-bg-in {
+    0% {
+        opacity: 0;
+    }
+    100% {}
+}
+
+@keyframes wg-popup-bg-out {
+    0% {}
+    100% {
+        opacity: 0;
+    }
+}
+
+.wg-popup-bg-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: #000;
+}

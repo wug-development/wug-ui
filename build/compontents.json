@@ -1,4 +1,4 @@
 {
-    "toast": "E:/github-program/wug-ui/packages/toast/index.js",
-    "message_box": "E:/github-program/wug-ui/packages/message-box/index.js"
+    "toast": "./packages/toast/index.js",
+    "message_box": "./packages/message-box/index.js"
 }

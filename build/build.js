@@ -22,10 +22,9 @@ const files = fs.readdirSync(dir);
 files.forEach(file => {
     const absolutePath = path.join(dir, file);
     if (isDir(absolutePath)) {
-        let fileKey = transformStr3(file.replace('orange_', ''))
+        let fileKey = transformStr3(file.replace('wug-ui', ''))
         // console.log(fileKey)
         json[fileKey] = `E:/github-program/wug-ui/packages/${file}/index.js`;
-        // json[fileKey] = `D:/projects/orange_ui/packages/${file}/index.js`;
     }
 });
 

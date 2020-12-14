@@ -3,30 +3,51 @@
         <div class="home-title">组件库</div>
         <ul class="comp-list">
             <li @click="showLayer">Toast</li>
-            <li>Message box</li>
-            <li>Lazy load</li>
+            <li @click="showMessage">Message box</li>
+            <li @click="toPage('lz')">Lazy load</li>
         </ul>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+// import Main from '@/components/Main.vue'
 
 export default {
     name: 'home',
+    data () {
+        return {
+        }
+    },
     // components: {
     //     HelloWorld
     // },
     methods: {
+        toPage (v) {
+            this.$router.push({
+                path: '/lz'
+            })
+        },
         showLayer () {
             this.$toast('OK')
+        },
+        showMessage () {
+            // this.$messagebox('提示')
+            this.$messagebox({
+                title: '温馨提示',
+                message: 'OK',
+                callback: res => {
+                    console.log(res)
+                }
+            })
         }
     }
 }
 </script>
 
 <style lang="scss">
+@import '@/assets/css/set.scss';
+
 .home-box{
     height: 100%;
     position: relative;
@@ -56,7 +77,7 @@ export default {
             border-bottom: 1px solid #eee;
             text-align: left;
             padding-left: 15px;
-            color: #2FA2F5;
+            color: $color;
             position: relative;
         }
         li::after{

@@ -20,14 +20,17 @@ yarn-error.log*
 *.sln
 *.sw*
 
+# Lint
+.editorconfig
+.eslintrc.js
+
 # 以下是新增的
 # 要忽略目录和指定文件
 build/
 examples/
-packages/
 public/
-src/
 util/
+docs/
 vue.config.js
 babel.config.js
 *.map

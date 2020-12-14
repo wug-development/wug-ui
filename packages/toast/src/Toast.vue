@@ -1,6 +1,6 @@
 <template>
     <transition name="alert-fade">
-        <div id="toast" v-show="visible" class="dialog-tips dialog-center">
+        <div id="toast" v-if="visible" class="dialog-tips dialog-center">
             {{ message }}
         </div>
     </transition>
@@ -15,7 +15,7 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .alert-fade-enter-active,
 .alert-fade-leave-active {
     transition: opacity 0.3s;
@@ -31,7 +31,7 @@ export default {
     padding: 10px;
     border-radius: 8px;
     white-space: nowrap;
-    background-color: rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, .7);
     box-shadow: 0px 8px 30px 0 rgba(0, 0, 0, 0.363);
     text-align: center;
     color: #fff;

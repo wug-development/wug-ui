@@ -21,50 +21,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-// const path = require('path')
-// function resolve(dir) {
-//   return path.join(__dirname, dir)
-// }
-// module.exports = {
-//   // 修改 src 为 examples
-//   pages: {
-//     index: {
-//       entry: "examples/main.js",
-//       template: "public/index.html",
-//       filename: "index.html"
-//     }
-//   },
-//   // 组件样式内联
-//   css: {
-//     extract: false
-//   },
-//   // 扩展 webpack 配置，使 packages 加入编译
-//   chainWebpack: config => {
-//     config.resolve.alias
-//       .set('@', resolve('examples'))
-//       .set('~', resolve('packages'))
-//     config.module
-//       .rule('eslint')
-//       .exclude.add(path.resolve('lib'))
-//       .end()
-//       .exclude.add(path.resolve('examples/docs'))
-//       .end()
-      
-//     config.module
-//       .rule('js')
-//       .include
-//       .add('/packages/')
-//       .end()
-//       .include.add(/examples/)
-//       .end()
-//       .use('babel')
-//       .loader('babel-loader')
-//       .tap(options => {
-//         // 修改它的选项...
-//         return options
-//       })
-//   }
-// };
 const NODE_ENV = 'development' // 开发环境 打包doc
 // const NODE_ENV = 'lib' // 组件库 上传npm
 const components = require('./build/compontents.json');
@@ -86,16 +42,16 @@ const baseConfig = {
                 return options
             })
     },
-    //如有scss配置需求
-    // css: {
-    //   extract: false,
-    //   loaderOptions: {
-    //     // 给 sass-loader 传递选项
-    //     sass: {
-    //       data: `@import "public/css/ui.scss";`
-    //     }
-    //   },
-    // }
+    // 如有scss配置需求
+    css: {
+        extract: false,
+        // loaderOptions: {
+        //     // 给 sass-loader 传递选项
+        //     sass: {
+        //         data: `@import "public/css/ui.scss";`
+        //     }
+        // },
+    }
 }
 const devConfig = {
     pages: {
@@ -110,16 +66,19 @@ const devConfig = {
     ...baseConfig
 }
 const buildConfig = {
-    configureWebpack: {
-        entry: components,
-        output: {
-            filename: '[name].js',
-            libraryTarget: 'commonjs2',
-        },
-    },
+    // configureWebpack: {
+    //     entry: components,
+    //     // output: {
+    //     //     filename: 'index.js',
+    //     //     libraryTarget: 'commonjs2',
+    //     //     // path: path.resolve(__dirname, 'lib/[name]/index.js')
+    //     //     chunkFilename: 'js/[name]_chunk.js'
+    //     // },
+    // },
     outputDir: 'lib',
     productionSourceMap: false,
     ...baseConfig
 }
 
+console.log(NODE_ENV)
 module.exports = NODE_ENV === 'development' ? devConfig : buildConfig;
