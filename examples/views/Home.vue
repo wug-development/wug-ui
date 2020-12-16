@@ -5,6 +5,7 @@
             <li @click="showLayer">Toast</li>
             <li @click="showMessage">Message box</li>
             <li @click="toPage('lz')">Lazy load</li>
+            <li @click="showIndicator">Indicator</li>
         </ul>
     </div>
 </template>
@@ -40,7 +41,15 @@ export default {
                     console.log(res)
                 }
             })
+        },
+        showIndicator () {
+            this.$indicator.show()
+            setTimeout(() => {
+                this.$indicator.hide()
+            }, 3000)
         }
+    },
+    mounted () {
     }
 }
 </script>
