@@ -24,7 +24,6 @@ export default {
     },
     mounted () {
         let t = this.$route.name
-        console.log(t)
         this.title = t
     }
 }
@@ -44,7 +43,7 @@ export default {
         height: 40px;
         line-height: 40px;
         background-color: #fff;
-        box-sizing: 0 1px 2px rgba(0,0,0,.3);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
         i{
             position: absolute;
             top: 50%;

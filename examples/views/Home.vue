@@ -6,6 +6,9 @@
             <li @click="showMessage">Message box</li>
             <li @click="toPage('lz')">Lazy load</li>
             <li @click="showIndicator">Indicator</li>
+            <li @click="showPopup">Popup</li>
+            <li @click="showPicker">Picker</li>
+            <li @click="showDatePicker">Date Picker</li>
         </ul>
     </div>
 </template>
@@ -26,7 +29,7 @@ export default {
     methods: {
         toPage (v) {
             this.$router.push({
-                path: '/lz'
+                path: '/' + v
             })
         },
         showLayer () {
@@ -47,6 +50,13 @@ export default {
             setTimeout(() => {
                 this.$indicator.hide()
             }, 3000)
+        },
+        showPopup () {
+            this.toPage('popup')
+        },
+        showPicker () {
+        },
+        showDatePicker () {
         }
     },
     mounted () {

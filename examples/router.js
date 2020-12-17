@@ -24,6 +24,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Lazyload'], resolve)
                     }
+                },
+                {
+                    path: '/popup',
+                    name: 'popup',
+                    component (resolve) {
+                        require(['@/views/Popup'], resolve)
+                    }
                 }
             ]
         }
