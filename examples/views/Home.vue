@@ -55,6 +55,7 @@ export default {
             this.toPage('popup')
         },
         showPicker () {
+            this.toPage('picker')
         },
         showDatePicker () {
         }

@@ -31,6 +31,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Popup'], resolve)
                     }
+                },
+                {
+                    path: '/picker',
+                    name: 'picker',
+                    component (resolve) {
+                        require(['@/views/Picker'], resolve)
+                    }
                 }
             ]
         }
