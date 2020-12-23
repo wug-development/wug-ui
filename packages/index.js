@@ -27,6 +27,8 @@ import lazyload from './lazyload'
 import indicator from './indicator'
 import popup from './popup'
 import picker from './picker'
+import PopupPicker from './popup-picker'
+import DatetimePicker from './datetime-picker'
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
 const install = function (Vue) {
     // 判断是否安装
@@ -39,6 +41,8 @@ const install = function (Vue) {
     Vue.use(lazyload)
     Vue.component(popup.name, popup)
     Vue.component(picker.name, picker)
+    Vue.component(PopupPicker.name, PopupPicker)
+    Vue.component(DatetimePicker.name, DatetimePicker)
 }
 
 // 判断是否是直接引入文件
@@ -54,5 +58,7 @@ export default {
     messagebox,
     lazyload,
     popup,
-    picker
+    picker,
+    PopupPicker,
+    DatetimePicker
 }

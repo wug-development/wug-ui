@@ -8,6 +8,7 @@
             <li @click="showIndicator">Indicator</li>
             <li @click="showPopup">Popup</li>
             <li @click="showPicker">Picker</li>
+            <li @click="showPopupPicker">Popup Picker</li>
             <li @click="showDatePicker">Date Picker</li>
         </ul>
     </div>
@@ -57,7 +58,11 @@ export default {
         showPicker () {
             this.toPage('picker')
         },
+        showPopupPicker () {
+            this.toPage('popuppicker')
+        },
         showDatePicker () {
+            this.toPage('datetimepicker')
         }
     },
     mounted () {

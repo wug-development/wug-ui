@@ -1,7 +1,7 @@
 <template>
     <div class="picker-box">
         <wg-picker :slots="pickerData" @change="pickerChange" :visibleItemNum="7" :itemHeight="30"></wg-picker>
-        <wg-picker :slots="pickerDatas" @change="pickerChanges" :visibleItemNum="5" :itemHeight="30"></wg-picker>
+        <wg-picker :slots="pickerDatas" :bar="true" @change="pickerChanges" :visibleItemNum="5" @confirm="pickerConfirm" :itemHeight="30"></wg-picker>
     </div>
 </template>
 
@@ -56,12 +56,15 @@ export default {
             }
             return arr
         },
+        pickerConfirm (v) {
+            console.log(v)
+        },
         pickerChange (v) {
             console.log(v)
         },
         pickerChanges (v) {
             if (v.key === 0) {
-                if (v.value.name === '北京') {
+                if (v.value[0].name === '北京') {
                     this.pickerDatas[2].values = [{ name: '北京', age: 22 }, { name: '海淀', age: 26 }]
                 } else {
                     this.pickerDatas[2].values = [{ name: '石家庄', age: 22 }, { name: '秦皇岛', age: 26 }]

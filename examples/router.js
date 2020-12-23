@@ -38,6 +38,20 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Picker'], resolve)
                     }
+                },
+                {
+                    path: '/popuppicker',
+                    name: 'popuppicker',
+                    component (resolve) {
+                        require(['@/views/PopupPicker'], resolve)
+                    }
+                },
+                {
+                    path: '/datetimepicker',
+                    name: 'datetimepicker',
+                    component (resolve) {
+                        require(['@/views/DatetimePicker'], resolve)
+                    }
                 }
             ]
         }

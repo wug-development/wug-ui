@@ -18,7 +18,7 @@ export default {
         return {
             isShow: false,
             name: '',
-            transitionName: 'wg-popup-slide-right',
+            transitionName: 'wg-popup-fade',
             bgOpacity: false,
             boxWidth: '100%',
             boxHeight: '100%'
