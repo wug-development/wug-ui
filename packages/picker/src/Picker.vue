@@ -7,7 +7,7 @@
         <div class="wg-picker-body" :style="{height: boxHeight + 'px'}">
             <div class="wg-picker-line wg-picker-line-top" :style="{height: pad + 'px'}"></div>
             <div class="wg-picker-line wg-picker-line-bottom" :style="{height: pad + 'px'}"></div>
-            <PickerSlot v-for="(l, i) in list" :key="i" :index="i" :valuekey="l.valuekey || valueKey" :selected="l.defaultIndex" :values="l.values" :content="l.content" :flex="l.flex" :style="{textAlign: l.align || 'center'}" :visible-item-num="visibleItemNum" :item-height="itemHeight" @change="valueChange"></PickerSlot>
+            <PickerSlot v-for="(l, i) in list" :key="i" :index="i" :valuekey="l.valuekey || valueKey" :defaultValue="l.defaultValue" :defaultindex="l.defaultIndex" :values="l.values" :content="l.content" :flex="l.flex" :style="{textAlign: l.align || 'center'}" :visible-item-num="visibleItemNum" :item-height="itemHeight" @change="valueChange" :min="l.minValue" :max="l.maxValue" :disables="l.disableValues"></PickerSlot>
         </div>
     </div>
 </template>
@@ -22,7 +22,6 @@ export default {
         return {
             list: [],
             len: 1,
-            datas: [],
             pad: 72,
             boxHeight: 180,
             values: []
@@ -33,7 +32,6 @@ export default {
     },
     methods: {
         valueChange (v) {
-            this.datas[v.index] = v.value
             this.values[v.index] = v.value
             this.$emit('change', {
                 key: v.index,
@@ -48,9 +46,10 @@ export default {
         },
         getSlotValues () {
             let v = []
-            for (let item of this.list) {
-                v.push(typeof item.selected === 'number' ? item.values[item.selected] : (item.values ? item.values[0] : item.content))
-            }
+            this.list.forEach(item => {
+                item.defaultValue = typeof item.selected === 'number' ? item.values[item.selected] : (item.values ? item.values[0] : item.content)
+                v.push(item.defaultValue)
+            })
             this.values = v
         }
     },
@@ -58,14 +57,6 @@ export default {
         this.list = this.slots
         this.getSlotValues()
         this.len = this.list.length
-        for (let i in this.list) {
-            let _index = this.list[i].defaultIndex || 0
-            if (this.list[i].values) {
-                this.datas.push(this.list[i].values[_index])
-            } else {
-                this.datas.push(this.list[i].content)
-            }
-        }
         if (this.visibleItemNum && Number(this.visibleItemNum) > 2) {
             let num = parseInt(this.visibleItemNum)
             this.boxHeight = num * (this.itemHeight || 36)

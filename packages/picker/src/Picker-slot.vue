@@ -19,7 +19,7 @@ import touchMethod from './touch'
 
 export default {
     name: 'wg-picker-slot',
-    props: ['values', 'flex', 'index', 'selected', 'valuekey', 'visibleItemNum', 'itemHeight', 'content'],
+    props: ['values', 'flex', 'index', 'defaultValue', 'defaultindex', 'valuekey', 'visibleItemNum', 'itemHeight', 'content', 'min', 'max', 'disables'],
     data () {
         return {
             list: [],
@@ -31,15 +31,64 @@ export default {
             touchData: {},
             boxH: 0,
             boxHeight: 0,
-            pad: 0
+            pad: 0,
+            currentIndex: -1,
+            oldValue: '',
+            currentValue: null,
+            maxValue: '',
+            minValue: '',
+            disableValues: []
         }
     },
     methods: {
         valueChange () {
+            this.checkData(this.list[this.checkValues])
             this.$emit('change', {
                 index: this.index,
                 value: this.list[this.checkValues]
             })
+            this.oldValue = this.list[this.checkValues]
+        },
+        checkData (v) {
+            this.currentValue = null
+            if (v !== undefined) {
+                this.dataKey && (v = v[this.dataKey])
+                if (this.minValue !== '' && v < this.minValue) {
+                    this.currentValue = this.minValue
+                } else if (this.maxValue !== '' && v > this.maxValue) {
+                    this.currentValue = this.maxValue
+                } else if (this.disableValues.length > 0 && this.disableValues.includes(v)) {
+                    this.currentValue = this.getToValue(v)
+                }
+            } else if (this.minValue !== '') {
+                this.currentValue = this.minValue
+            }
+            this.currentValue !== null && this.setCheckValues('v')
+        },
+        getToValue (v) {
+            let i = this.list.findIndex(e => {
+                let m = this.dataKey ? e[this.dataKey] : e
+                return m === v
+            })
+            let _v = ''
+            let value = ''
+            for (; i < this.list.length; i++) {
+                _v = this.dataKey ? this.list[i][this.dataKey] : this.list[i]
+                if (!this.disableValues.includes(_v) && this.maxValue && _v < this.maxValue) {
+                    value = _v
+                    break
+                }
+            }
+            if (value === '') {
+                for (; i > 0; i--) {
+                    _v = this.dataKey ? this.list[i][this.dataKey] : this.list[i]
+                    if (!this.disableValues.includes(_v) && this.maxValue && _v < this.maxValue) {
+                        value = _v
+                        break
+                    }
+                }
+            }
+            return value
         },
         bindEven () {
             let touchData = {}
@@ -91,6 +140,26 @@ export default {
         },
         getBoxHeight () {
             this.boxH = (this.list.length - 1) * this.itemH
+        },
+        setCheckValues (v) {
+            if (this.list && this.list.length > 0) {
+                let i = this.currentIndex
+                if ((i < 0 && this.currentValue !== null) || (v && this.currentValue !== null)) {
+                    i = this.list.findIndex(e => {
+                        return this.dataKey ? e[this.dataKey] === this.currentValue : e === this.currentValue
+                    })
+                }
+                if (i > -1) {
+                    this.checkValues = i
+                    this.changeTop(-this.itemH * this.checkValues, '.2')
+                } else {
+                    this.checkValues = 0
+                    this.changeTop(0, '.2')
+                }
+            } else {
+                this.checkValues = 0
+                this.changeTop(0, '.2')
+            }
         }
     },
     mounted () {
@@ -98,12 +167,8 @@ export default {
         if (this.values && this.values.length > 1) {
             this.getBoxHeight()
             this.bindEven()
-        }
-        if (this.selected && this.list && this.selected < this.list.length) {
-            this.checkValues = this.selected
-            this.changeTop(-this.itemH * this.checkValues, '.2')
-        } else {
-            this.changeTop(0, '.2')
+            this.checkData()
+            this.setCheckValues()
         }
     },
     created () {
@@ -115,6 +180,11 @@ export default {
         let num = parseInt(itemNum || 5)
         this.boxHeight = num * (this.itemHeight || 36)
         this.pad = (num - 1) / 2 * (this.itemHeight || 36)
+        this.defaultindex && (this.currentIndex = this.defaultindex)
+        this.defaultValue && (this.currentValue = this.defaultValue)
+        this.min && (this.minValue = this.min)
+        this.max && (this.maxValue = this.max)
+        this.disables && (this.disableValues = this.disables)
     },
     watch: {
         values (v) {
@@ -123,6 +193,23 @@ export default {
                 this.getBoxHeight()
                 this.transformsTop()
             }
+        },
+        defaultindex (v) {
+            this.currentIndex = v
+            this.setCheckValues()
+        },
+        defaultValue (v) {
+            this.currentValue = v
+            this.setCheckValues('v')
+        },
+        min (v) {
+            this.minValue = v
+        },
+        max (v) {
+            this.maxValue = v
+        },
+        disables (v) {
+            this.disableValues = v
         }
     }
 }

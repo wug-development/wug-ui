@@ -10,6 +10,7 @@ export default {
     data () {
         return {
             isShow: false,
+            endDate: '2020-12-12',
             pickerData: [
                 {
                     align: 'right',

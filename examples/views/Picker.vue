@@ -2,6 +2,7 @@
     <div class="picker-box">
         <wg-picker :slots="pickerData" @change="pickerChange" :visibleItemNum="7" :itemHeight="30"></wg-picker>
         <wg-picker :slots="pickerDatas" :bar="true" @change="pickerChanges" :visibleItemNum="5" @confirm="pickerConfirm" :itemHeight="30"></wg-picker>
+        <wg-picker :slots="pickerDataYear" @change="pickerChangeYear" :visibleItemNum="5"></wg-picker>
     </div>
 </template>
 
@@ -44,6 +45,12 @@ export default {
                     values: []
                 }
             ],
+            pickerDataYear: [{
+                values: [],
+                minValue: 1995,
+                maxValue: 2015,
+                disableValues: [2005, 2004]
+            }],
             status: false,
             len: 0
         }
@@ -71,6 +78,9 @@ export default {
                 }
             }
             // this.status = !this.status
+        },
+        pickerChangeYear (v) {
+            console.log(v)
         }
     },
     created () {
@@ -80,6 +90,8 @@ export default {
 
         this.pickerDatas[0].values = [{ name: '北京', age: 22 }, { name: '河北', age: 26 }, { name: '山西', age: 26 }, { name: '湖北', age: 26 }, { name: '河南', age: 26 }, { name: '天津', age: 26 }, { name: '上海', age: 26 }]
         this.pickerDatas[2].values = [{ name: '北京', age: 22 }, { name: '海淀', age: 26 }]
+
+        this.pickerDataYear[0].values = this.getArr(1991, 2021)
     },
     watch: {
         status (v) {
@@ -94,7 +106,8 @@ export default {
 <style>
 .picker-box{
     height: 100%;
-    overflow: hidden;
+    padding: 0 0 100px 0;
+    overflow-y: auto;
 }
 .wg-picker-box{
     overflow: hidden;

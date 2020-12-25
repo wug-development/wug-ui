@@ -37,7 +37,21 @@ export default {
             this.$emit('cancel', v)
         },
         valueChange (v) {
-            if (this.datetimeType.indexOf('date') > -1 && v.key < 2 && this.lists.length > 2) {
+            if (this.datetimeType.indexOf('date') > -1 && v.key < 3 && this.lists.length > 2) {
+                if (this.maxDate) {
+                    let max = this.maxDate.split(/-|\/|\./)
+                    if (v.key === 2 && Number(max[2]) > Number(v.value[2]) && Number(max[1] >= Number(v.value[1]))) {
+                        this.lists[0].defaultValue = max[0]
+                        this.lists[1].defaultValue = max[1]
+                        this.lists[2].defaultValue = max[2]
+                    }
+                }
+                //  else if (this.minDate) {
+                //     let min = this.minDate.split(/-|\/|\./)
+                //     if (v.key === 2) {
+                //         // if (Number(v.value[2].value) < )
+                //     }
+                // }
                 let days = DateDeal.getDay(Number(v.value[1].value), Number(v.value[0].value), this.dayFormat)
                 this.lists[2].values = days
             }
