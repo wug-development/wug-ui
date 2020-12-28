@@ -24,7 +24,8 @@ export default {
             len: 1,
             pad: 72,
             boxHeight: 180,
-            values: []
+            values: [],
+            timer: 0
         }
     },
     components: {
@@ -33,10 +34,13 @@ export default {
     methods: {
         valueChange (v) {
             this.values[v.index] = v.value
-            this.$emit('change', {
-                key: v.index,
-                value: JSON.parse(JSON.stringify(this.values))
-            })
+            clearTimeout(this.timer)
+            this.timer = setTimeout(() => {
+                this.$emit('change', {
+                    key: v.index,
+                    value: JSON.parse(JSON.stringify(this.values))
+                })
+            }, 1)
         },
         confirm () {
             this.$emit('confirm', JSON.parse(JSON.stringify(this.values)))
@@ -52,6 +56,12 @@ export default {
             })
             this.values = v
         }
+    },
+    mounted () {
+        this.valueChange({
+            index: 0,
+            value: this.values[0]
+        })
     },
     created () {
         this.list = this.slots

@@ -146,7 +146,7 @@ export default {
                 let i = this.currentIndex
                 if ((i < 0 && this.currentValue !== null) || (v && this.currentValue !== null)) {
                     i = this.list.findIndex(e => {
-                        return this.dataKey ? e[this.dataKey] === this.currentValue : e === this.currentValue
+                        return this.dataKey ? String(e[this.dataKey]) === String(this.currentValue) : String(e) === String(this.currentValue)
                     })
                 }
                 if (i > -1) {
@@ -197,10 +197,14 @@ export default {
         defaultindex (v) {
             this.currentIndex = v
             this.setCheckValues()
+            this.valueChange()
         },
         defaultValue (v) {
-            this.currentValue = v
-            this.setCheckValues('v')
+            if (v !== null) {
+                this.currentValue = v
+                this.setCheckValues('v')
+                this.valueChange()
+            }
         },
         min (v) {
             this.minValue = v

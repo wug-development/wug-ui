@@ -2,7 +2,7 @@
     <div class="wg-popup-picker-box">
         <wg-popup :visible="isShow" :opacity="true">
             <transition name="wg-popup-slide">
-                <wg-picker class="wg-popup-picker-bottom" valueKey="text" v-show="isShow" @change="valueChange" :slots="lists" @cancel="cancel" @confirm="confirm" :bar="true"></wg-picker>
+                <wg-picker class="wg-popup-picker-bottom" valueKey="value" v-show="isShow" @change="valueChange" :slots="lists" @cancel="cancel" @confirm="confirm" :bar="true"></wg-picker>
             </transition>
         </wg-popup>
     </div>
@@ -22,6 +22,7 @@ export default {
             datetimeType: 'date',
             minDate: '',
             maxDate: '',
+            values: [],
             disableDate: []
         }
     },
@@ -31,6 +32,7 @@ export default {
     },
     methods: {
         confirm (v) {
+            this.values = v
             this.$emit('confirm', v)
         },
         cancel (v) {
@@ -38,23 +40,75 @@ export default {
         },
         valueChange (v) {
             if (this.datetimeType.indexOf('date') > -1 && v.key < 3 && this.lists.length > 2) {
-                if (this.maxDate) {
+                if (v.key <= 2) {
+                    let days = DateDeal.getDay(Number(v.value[1].value), Number(v.value[0].value), this.dayFormat)
+                    this.lists[2].values = days
+                    let _value = v.value
                     let max = this.maxDate.split(/-|\/|\./)
-                    if (v.key === 2 && Number(max[2]) > Number(v.value[2]) && Number(max[1] >= Number(v.value[1]))) {
-                        this.lists[0].defaultValue = max[0]
-                        this.lists[1].defaultValue = max[1]
-                        this.lists[2].defaultValue = max[2]
+                    let min = this.minDate.split(/-|\/|\./)
+                    let ymd = [_value[0].value, _value[1].value, _value[2].value]
+                    let _v = ymd.join('')
+                    if (max.length > 0 && this.compareMaxValue(_value, max)) {
+                        let days = DateDeal.getDay(Number(max[1]), Number(max[0]), this.dayFormat)
+                        this.lists[2].values = days
+                        this.values = max
+                    } else if (min.length > 0 && this.compareValue(_value, min)) {
+                        let days = DateDeal.getDay(Number(min[1]), Number(min[0]), this.dayFormat)
+                        this.lists[2].values = days
+                        this.values = min
+                    } else if (this.disableDate && this.disableDate.length > 0) {
+                        let i = this.disableDate.findIndex(e => {
+                            let d = e.replace(/-|\/|\./g, '')
+                            return d === _v
+                        })
+                        if (i > -1) {
+                            this.setDate(v.key, this.values)
+                        } else {
+                            this.values = ymd
+                        }
+                    } else {
+                        this.values = ymd
                     }
                 }
-                //  else if (this.minDate) {
-                //     let min = this.minDate.split(/-|\/|\./)
-                //     if (v.key === 2) {
-                //         // if (Number(v.value[2].value) < )
-                //     }
-                // }
-                let days = DateDeal.getDay(Number(v.value[1].value), Number(v.value[0].value), this.dayFormat)
-                this.lists[2].values = days
             }
+        },
+        compareValue (values, arr) {
+            let res = false
+            if (Number(arr[0]) > Number(values[0].value)) {
+                this.setDate(0, arr)
+                res = true
+            } else if (Number(arr[0]) === Number(values[0].value)) {
+                if (Number(arr[1]) > Number(values[1].value)) {
+                    this.setDate(1, arr)
+                    res = true
+                } else if (Number(arr[2]) > Number(values[2].value)) {
+                    this.setDate(2, arr)
+                    res = true
+                }
+            }
+            return res
+        },
+        compareMaxValue (values, arr) {
+            let res = false
+            if (Number(arr[0]) < Number(values[0].value)) {
+                this.setDate(0, arr)
+                res = true
+            } else if (Number(arr[0]) === Number(values[0].value)) {
+                if (Number(arr[1]) < Number(values[1].value)) {
+                    this.setDate(1, arr)
+                    res = true
+                } else if (Number(arr[2]) < Number(values[2].value)) {
+                    this.setDate(2, arr)
+                    res = true
+                }
+            }
+            return res
+        },
+        setDate (i, arr) {
+            this.lists[i].defaultValue = String(arr[i])
+            this.$nextTick(() => {
+                this.lists[i].defaultValue = null
+            })
         },
         initDate () {
             let years = DateDeal.getYear(this.minDate, this.maxDate, this.yearFormat || '')

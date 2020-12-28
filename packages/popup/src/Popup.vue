@@ -24,9 +24,6 @@ export default {
             boxHeight: '100%'
         }
     },
-    beforeMount () {
-        console.log(this.$slots)
-    },
     created () {
         this.title && (this.name = this.title)
         if (this.transition) {
