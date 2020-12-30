@@ -10,6 +10,7 @@
             <li @click="showPicker">Picker</li>
             <li @click="showPopupPicker">Popup Picker</li>
             <li @click="showDatePicker">Date Picker</li>
+            <li @click="showSwipe">Swipe</li>
         </ul>
     </div>
 </template>
@@ -63,6 +64,9 @@ export default {
         },
         showDatePicker () {
             this.toPage('datetimepicker')
+        },
+        showSwipe () {
+            this.toPage('swipe')
         }
     },
     mounted () {

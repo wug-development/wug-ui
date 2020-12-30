@@ -29,6 +29,8 @@ import popup from './popup'
 import picker from './picker'
 import PopupPicker from './popup-picker'
 import DatetimePicker from './datetime-picker'
+import Swipe from './swipe'
+import SwipeItem from './swipe-item'
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
 const install = function (Vue) {
     // 判断是否安装
@@ -43,6 +45,8 @@ const install = function (Vue) {
     Vue.component(picker.name, picker)
     Vue.component(PopupPicker.name, PopupPicker)
     Vue.component(DatetimePicker.name, DatetimePicker)
+    Vue.component(Swipe.name, Swipe)
+    Vue.component(SwipeItem.name, SwipeItem)
 }
 
 // 判断是否是直接引入文件
@@ -60,5 +64,7 @@ export default {
     popup,
     picker,
     PopupPicker,
-    DatetimePicker
+    DatetimePicker,
+    Swipe,
+    SwipeItem
 }

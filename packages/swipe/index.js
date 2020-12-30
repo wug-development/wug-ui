@@ -21,22 +21,5 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router.js'
-
-import WugUI from '../packages/index.js'
-Vue.use(WugUI)
-
-// import Toast from '../packages/toast'
-
-// Vue.prototype.$toast = Toast
-// Vue.use(Toast)
-window.log = window.console.log
-
-Vue.config.productionTip = false
-
-new Vue({
-    router,
-    render: h => h(App)
-}).$mount('#app')
+import Swipe from './src/Swipe.vue'
+export default Swipe

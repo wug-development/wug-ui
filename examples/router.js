@@ -52,6 +52,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/DatetimePicker'], resolve)
                     }
+                },
+                {
+                    path: '/swipe',
+                    name: 'swipe',
+                    component (resolve) {
+                        require(['@/views/Swipe'], resolve)
+                    }
                 }
             ]
         }
