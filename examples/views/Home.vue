@@ -11,6 +11,7 @@
             <li @click="showPopupPicker">Popup Picker</li>
             <li @click="showDatePicker">Date Picker</li>
             <li @click="showSwipe">Swipe</li>
+            <li @click="toPage('button')">Button</li>
         </ul>
     </div>
 </template>

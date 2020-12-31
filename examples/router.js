@@ -59,6 +59,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Swipe'], resolve)
                     }
+                },
+                {
+                    path: '/button',
+                    name: 'button',
+                    component (resolve) {
+                        require(['@/views/Button'], resolve)
+                    }
                 }
             ]
         }

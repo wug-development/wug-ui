@@ -20,7 +20,7 @@ export default {
             speedSecond: 3000,
             isShowIndicators: true,
             swipeWidth: '100%',
-            swipeHeight: 0,
+            swipeHeight: 200,
             timer: 0,
             pages: [],
             nextPage: '',
