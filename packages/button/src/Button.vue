@@ -2,7 +2,7 @@
     <div class="wg-button-box" :class="buttonType + buttonSize + borderRadius">
         <span class="wg-button-text" :class="buttonIcon"><slot></slot></span>
         <template v-if="icon">
-            <wg-spinner size="16px" v-show="showIcon"></wg-spinner>
+            <wg-spinner size="16px" v-show="showIcon" :type="buttonIcon"></wg-spinner>
         </template>
     </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
     <div class="button-box">
-        <wg-button class="btn" icon="loading" :visibleIcon="showIcon">确定</wg-button>
-        <wg-button class="btn" type="default">白色</wg-button>
+        <wg-button class="btn" icon="loading">确定</wg-button>
+        <wg-button class="btn" type="default" icon="snake" :visibleIcon="showIcon">白色</wg-button>
         <wg-button class="btn" size="small" type="success">成功</wg-button>
-        <wg-button class="btn" size="middle" type="warning">警告</wg-button>
+        <wg-button class="btn" size="middle" type="warning" icon="bounce" :visibleIcon="showIcon">警告</wg-button>
         <wg-button class="btn" type="fail" radius="none">失败</wg-button>
         <wg-button class="btn" type="info">详情</wg-button>
         <wg-button class="btn" type="primary">主要</wg-button>

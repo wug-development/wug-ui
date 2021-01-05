@@ -1,20 +1,57 @@
 <template>
     <div class="wg-spinner-box" :style="{width: circleSize, height: circleSize}">
-        <div v-for="(n, i) in 12" :key="i" class="wg-circle-dot"></div>
+        <template v-if="spinnerType === 'dot'">
+            <spinner-dot :size="spType"></spinner-dot>
+        </template>
+        <template v-else-if="spinnerType === 'line'">
+            <spinner-line :size="spType"></spinner-line>
+        </template>
+        <template v-else>
+            <spinner-circle :size="spType"></spinner-circle>
+        </template>
     </div>
 </template>
 
 <script>
+import spinnerCircle from './spinner-circle'
+import spinnerDot from './spinner-dot'
+import spinnerLine from './spinner-line'
 export default {
     name: 'wg-spinner',
-    props: ['size'],
+    props: ['size', 'type'],
     data () {
         return {
-            circleSize: '32px'
+            circleSize: '32px',
+            spinnerType: 'circle',
+            spType: ''
         }
     },
+    components: {
+        'spinner-circle': spinnerCircle,
+        'spinner-dot': spinnerDot,
+        'spinner-line': spinnerLine
+    },
     created () {
-        this.size && (this.circleSize = this.size)
+        if (this.size) {
+            this.circleSize = this.size
+            var n = Number(this.size.replace(/[^\d]/g, ''))
+            if (n >= 0) {
+                if (n < 30) {
+                    this.spType = 's'
+                } else if (n > 50) {
+                    this.spType = 'l'
+                }
+            }
+        }
+        if (typeof this.type === 'string') {
+            if (this.type === 'snake') {
+                this.spinnerType = 'line'
+            } else if (this.type === 'bounce') {
+                this.spinnerType = 'dot'
+            } else {
+                this.spinnerType = 'circle'
+            }
+        }
     }
 }
 </script>
@@ -26,34 +63,5 @@ export default {
     height: 32px;
     position: relative;
     display: inline-block;
-    .wg-circle-dot{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        &::before{
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background-color: #f1f1f1;
-            animation: toop 1.2s infinite ease-in-out both;
-        }
-    }
-    @for $i from 1 to 12 {
-        .wg-circle-dot:nth-child(#{$i}) {
-            transform: rotate(calc(30deg * #{$i}));
-            &::before{
-                animation-delay: calc(-1.2s + 1.2s / 12 * #{$i});
-            }
-        }
-    }
-}
-@keyframes toop {
-    0%, 39%, 100% { opacity: 0 }
-    40% { opacity: 1 }
 }
 </style>
