@@ -12,6 +12,9 @@
             <li @click="showDatePicker">Date Picker</li>
             <li @click="showSwipe">Swipe</li>
             <li @click="toPage('button')">Button</li>
+            <li @click="toPage('header')">Header</li>
+            <li @click="toPage('radio')">Radio</li>
+            <li @click="toPage('checkbox')">CheckBox</li>
         </ul>
     </div>
 </template>

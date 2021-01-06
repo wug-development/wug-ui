@@ -66,6 +66,27 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Button'], resolve)
                     }
+                },
+                {
+                    path: '/header',
+                    name: 'header',
+                    component (resolve) {
+                        require(['@/views/Header'], resolve)
+                    }
+                },
+                {
+                    path: '/radio',
+                    name: 'radio',
+                    component (resolve) {
+                        require(['@/views/Radio'], resolve)
+                    }
+                },
+                {
+                    path: '/checkbox',
+                    name: 'checkbox',
+                    component (resolve) {
+                        require(['@/views/Checkbox'], resolve)
+                    }
                 }
             ]
         }
