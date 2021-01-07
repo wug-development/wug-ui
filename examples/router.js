@@ -87,6 +87,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Checkbox'], resolve)
                     }
+                },
+                {
+                    path: '/switch',
+                    name: 'switch',
+                    component (resolve) {
+                        require(['@/views/Switch'], resolve)
+                    }
                 }
             ]
         }

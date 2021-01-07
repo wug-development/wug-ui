@@ -36,6 +36,7 @@ import Spinner from './spinner'
 import Header from './header'
 import Radio from './radio'
 import Checkbox from './checkbox'
+import Switch from './switch'
 // 定义 install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
 const install = function (Vue) {
     // 判断是否安装
@@ -57,6 +58,7 @@ const install = function (Vue) {
     Vue.component(Header.name, Header)
     Vue.component(Radio.name, Radio)
     Vue.component(Checkbox.name, Checkbox)
+    Vue.component(Switch.name, Switch)
 }
 
 // 判断是否是直接引入文件
@@ -81,5 +83,6 @@ export default {
     Spinner,
     Header,
     Radio,
-    Checkbox
+    Checkbox,
+    Switch
 }

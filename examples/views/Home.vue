@@ -15,6 +15,7 @@
             <li @click="toPage('header')">Header</li>
             <li @click="toPage('radio')">Radio</li>
             <li @click="toPage('checkbox')">CheckBox</li>
+            <li @click="toPage('switch')">Switch</li>
         </ul>
     </div>
 </template>
