@@ -6,33 +6,28 @@
             <li @click="showMessage">Message box</li>
             <li @click="toPage('lz')">Lazy load</li>
             <li @click="showIndicator">Indicator</li>
-            <li @click="showPopup">Popup</li>
-            <li @click="showPicker">Picker</li>
-            <li @click="showPopupPicker">Popup Picker</li>
-            <li @click="showDatePicker">Date Picker</li>
-            <li @click="showSwipe">Swipe</li>
+            <li @click="toPage('popup')">Popup</li>
+            <li @click="toPage('picker')">Picker</li>
+            <li @click="toPage('popuppicker')">Popup Picker</li>
+            <li @click="toPage('datetimepicker')">Date Picker</li>
+            <li @click="toPage('swipe')">Swipe</li>
             <li @click="toPage('button')">Button</li>
             <li @click="toPage('header')">Header</li>
             <li @click="toPage('radio')">Radio</li>
             <li @click="toPage('checkbox')">CheckBox</li>
             <li @click="toPage('switch')">Switch</li>
+            <li @click="toPage('search')">Search</li>
         </ul>
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import Main from '@/components/Main.vue'
-
 export default {
     name: 'home',
     data () {
         return {
         }
     },
-    // components: {
-    //     HelloWorld
-    // },
     methods: {
         toPage (v) {
             this.$router.push({
@@ -57,21 +52,6 @@ export default {
             setTimeout(() => {
                 this.$indicator.hide()
             }, 3000)
-        },
-        showPopup () {
-            this.toPage('popup')
-        },
-        showPicker () {
-            this.toPage('picker')
-        },
-        showPopupPicker () {
-            this.toPage('popuppicker')
-        },
-        showDatePicker () {
-            this.toPage('datetimepicker')
-        },
-        showSwipe () {
-            this.toPage('swipe')
         }
     },
     mounted () {

@@ -94,6 +94,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Switch'], resolve)
                     }
+                },
+                {
+                    path: '/search',
+                    name: 'search',
+                    component (resolve) {
+                        require(['@/views/Search'], resolve)
+                    }
                 }
             ]
         }
