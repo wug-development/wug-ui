@@ -1,18 +1,23 @@
 <template>
     <div class="wg-search-box">
-        <input type="search" class="wg-search-input" :placeholder="placeholder" v-model="value">
+        <input type="search" class="wg-search-input" :placeholder="placeholder" v-model="curValue" :maxlength="max">
     </div>
 </template>
 
 <script>
 export default {
     name: 'wg-search',
-    props: ['placeholder', 'value'],
+    props: ['placeholder', 'value', 'max'],
     data () {
-
+        return {
+            curValue: ''
+        }
     },
     watch: {
         value (v) {
+            this.curValue = v
+        },
+        curValue (v) {
             this.$emit('input', v)
         }
     }
