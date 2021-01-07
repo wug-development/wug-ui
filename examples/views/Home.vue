@@ -4,8 +4,8 @@
         <ul class="comp-list">
             <li @click="showLayer">Toast</li>
             <li @click="showMessage">Message box</li>
-            <li @click="toPage('lz')">Lazy load</li>
             <li @click="showIndicator">Indicator</li>
+            <li @click="toPage('lz')">Lazy load</li>
             <li @click="toPage('popup')">Popup</li>
             <li @click="toPage('picker')">Picker</li>
             <li @click="toPage('popuppicker')">Popup Picker</li>
@@ -17,6 +17,7 @@
             <li @click="toPage('checkbox')">CheckBox</li>
             <li @click="toPage('switch')">Switch</li>
             <li @click="toPage('search')">Search</li>
+            <li @click="toPage('footer')">Footer</li>
         </ul>
     </div>
 </template>

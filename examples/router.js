@@ -101,6 +101,13 @@ export default new Router({
                     component (resolve) {
                         require(['@/views/Search'], resolve)
                     }
+                },
+                {
+                    path: '/footer',
+                    name: 'footer',
+                    component (resolve) {
+                        require(['@/views/Footer'], resolve)
+                    }
                 }
             ]
         }
