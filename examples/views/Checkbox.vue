@@ -12,19 +12,17 @@ export default {
     name: '',
     data () {
         return {
-            sex: [],
+            sex: [1],
             options: [
                 {
                     label: '男',
                     value: 1,
-                    disabled: false,
-                    checked: false
+                    disabled: false
                 },
                 {
                     label: '女',
                     value: 0,
-                    disabled: false,
-                    checked: true
+                    disabled: true
                 }
             ],
             sex1: [],

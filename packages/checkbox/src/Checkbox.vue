@@ -3,7 +3,7 @@
         <div class="wg-checkbox-warper" v-for="(item, i) in list" :key="i" :style="{display: display}">
             <label class="wg-checkbox-body">
                 <span class="wg-checkbox">
-                    <input type="checkbox" class="wg-input-checkbox" v-model="checkValue" :value="item.value">
+                    <input type="checkbox" class="wg-input-checkbox" v-model="checkValue" :disabled="item.disabled" :value="item.value">
                     <div class="wg-checkbox-cur"></div>
                 </span>
                 <span class="wg-checkbox-label">
@@ -26,8 +26,7 @@ export default {
             default: {
                 label: '',
                 value: '',
-                disabled: false,
-                checked: false
+                disabled: false
             }
         }
     },
@@ -39,6 +38,9 @@ export default {
         this.value && (this.checkValue = this.value)
     },
     methods: {
+        changeValue (v) {
+            this.checkValue = [v.value]
+        },
         dealItemProperty (v) {
             let arr = []
             let _proto = JSON.stringify(this.default)
@@ -109,6 +111,13 @@ export default {
                     background-color: #409EFF;
                 }
                 .wg-input-checkbox:checked+.wg-checkbox-cur::before{
+                    transform: translate(-50%, -60%) rotate(-45deg) scale(1);
+                }
+                .wg-input-checkbox:disabled+.wg-checkbox-cur{
+                    border: 1px solid #ccc;
+                    background-color: #ccc;
+                }
+                .wg-input-checkbox:disabled,.wg-input-checkbox:checked+.wg-checkbox-cur::before{
                     transform: translate(-50%, -60%) rotate(-45deg) scale(1);
                 }
             }

@@ -17,14 +17,12 @@ export default {
                 {
                     label: '男',
                     value: 1,
-                    disabled: false,
-                    checked: false
+                    disabled: true
                 },
                 {
                     label: '女',
                     value: 0,
-                    disabled: false,
-                    checked: true
+                    disabled: false
                 }
             ],
             sex1: '',

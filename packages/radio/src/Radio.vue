@@ -1,15 +1,15 @@
 <template>
     <div class="wg-radio-box" :style="{display: display}">
-        <div class="wg-radio-warper" v-for="(item, i) in list" :key="i" @click="checkRadio(item)" :style="{display: display}">
-            <div class="wg-radio-body">
+        <div class="wg-radio-warper" v-for="(item, i) in list" :key="i" :style="{display: display}">
+            <label class="wg-radio-body">
                 <span class="wg-radio">
-                    <input type="radio" class="wg-input-radio" v-model="checkValue" :value="item.value">
+                    <input type="radio" class="wg-input-radio" v-model="checkValue" :disabled="item.disabled" :value="item.value">
                     <div class="wg-radio-cur"></div>
                 </span>
                 <span class="wg-radio-label">
                     {{item.label}}
                 </span>
-            </div>
+            </label>
         </div>
     </div>
 </template>
@@ -26,8 +26,7 @@ export default {
             default: {
                 label: '',
                 value: '',
-                disabled: false,
-                checked: false
+                disabled: false
             }
         }
     },
@@ -39,9 +38,6 @@ export default {
         this.value && (this.checkValue = this.value)
     },
     methods: {
-        checkRadio (v) {
-            this.checkValue = v.value
-        },
         dealItemProperty (v) {
             let arr = []
             let _proto = JSON.stringify(this.default)
@@ -114,6 +110,13 @@ export default {
                     background-color: #409EFF;
                 }
                 .wg-input-radio:checked+.wg-radio-cur::before{
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                .wg-input-radio:disabled+.wg-radio-cur{
+                    border: 1px solid #ccc;
+                    background-color: #ccc;
+                }
+                .wg-input-radio:disabled,.wg-input-radio:checked+.wg-radio-cur::before{
                     transform: translate(-50%, -50%) scale(1);
                 }
             }
